@@ -1,3 +1,6 @@
+//TIC - TAC - TOE (USER VS USER)
+//CREATED BY NABIN PARESH SOMNATH
+
 #include<stdio.h>
 #include<windows.h>
 #include<stdlib.h>
