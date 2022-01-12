@@ -1,92 +1,109 @@
 //TIC - TAC - TOE (USER VS USER)
 //CREATED BY NABIN PARESH SOMNATH
 
-#include<stdio.h>
-#include<windows.h>
-#include<stdlib.h>
-#include<conio.h>
+#include <stdio.h>
+#include <conio.h>
+#include <windows.h>
+#include <stdlib.h>
+
+char square [10] = {'0','1','2','3','4','5','6','7','8','9'};
+int check();
+void  drawBoard();
+
+
 int main()
 {
-	int a,b,Not,i,restart;
-	l1:
-	system("cls");
-	printf("\t\t\t\tWElCOME TO BITWISE OPERATOR\n\n");
-	printf("1. AND   operator\n2. OR    operator\n3. XOR    operator\n4. left swift operator\n5. right swift operator\n6. NOT operator\n");
-	scanf("%d",&i);
-	system("cls");
-	if(i==1)
+	system("color 0f");
+	int player = 1, i, choice;
+	char mark;
+	
+	do 
 	{
-		printf("\n\t\t\tBitwise AND Operator\n");
-		printf("\nenter the value of a:");
-		scanf("%d",&a);
-		printf("enter the value of b:");
-		scanf("%d",&b);
-		printf("\nthe value of a&b is %d",a&b);
-	}
-	else if(i==2)
-	{
-		printf("\n\t\t\tBitwise OR Operator\n");
-		printf("\nenter the value of a:");
-		scanf("%d",&a);
-		printf("enter the value of b:");
-		scanf("%d",&b);
-		printf("the value of a|b is %d",a|b);
-	}
-	else if(i==3)
-	{
-		printf("\n\t\t\tBitwise XOR Operator\n");
-		printf("\nenter the value of a:");
-		scanf("%d",&a);
-		printf("enter the value of b:");
-		scanf("%d",&b);
-		printf("the value of a^b is %d",a^b);
-	}
-	else if(i==4)
-	{
-		printf("\n\t\t\tBitwise left swift operator\n");
-		printf("\nenter the value of a:");
-		scanf("%d",&a);
-		printf("enter the numbers you want to left swift:");
-		scanf("%d",&b);
-		printf("the value of a<<b is %d",a<<b);
-	}
-	else if(i==5)
-	{
-		printf("\n\t\t\tBitwise right swift operator\n");
-		printf("\nenter the value of a:");
-		scanf("%d",&a);
-		printf("enter the numbers you want to right swift:");
-		scanf("%d",&b);
-		printf("the value of a>>b is %d",a>>b);
-	}
-	else if(i==6)
-	{
-		printf("\n\t\t\tBitwise NOT Operator\n");
-		printf("\nenter the value of a:");
-		scanf("%d",&a);
-		Not= ~a;
-		printf("the value of ~a is %d",Not);
-	}
-	printf("\n\nEnter any key to continue.....");
-	getch();
-	system("cls");
-	l2:
-	printf("\npress 1 to restart otherwise press 0 to exit: ");
-		scanf("%d",&restart);
-		if(restart==1)
-		{
-			goto l1;
-		}
-		else if(restart==0)
-		{
-			for(;;)
-			{
-				break;
-			}
-		}
+	   	drawBoard();
+	    	player = (player % 2) ? 1:2;
+		printf("player %d, Enter the choice : ",player);
+	    	scanf("%d",&choice);
+	    mark = (player == 1)? '#':'*';
+		if(choice == 1 && square[1]=='1')
+	    	square[1] = mark;
+		else if (choice == 2 && square[2]=='2')
+		    square[2] = mark;
+		else if (choice == 3 && square[3]=='3')
+		    square[3] = mark;
+		else if (choice == 4 && square[4]=='4')
+		    square[4] = mark;
+		else if (choice == 5 && square[5]=='5')
+		    square[5] = mark;
+		else if (choice == 6 && square[6]=='6')
+		    square[6] = mark;
+		else if (choice == 7 && square[7]=='7')
+		    square[7] = mark;
+		else if (choice == 8 && square[8]=='8')
+		    square[8] = mark;
+		else if (choice == 9 && square[9]=='9')
+		    square[9] = mark;
+		
+		
 		else
 		{
-			system("cls");
-			goto l2;
+			printf ("Invalid Option");
+			player;
+			getch();
 		}
+		i = check();
+		player++;    
+		
+	}
+	
+	while(i==-1);
+	
+	drawBoard(); 
+	
+	if(i==1)
+	{
+		printf("==>player %d won ",--player);
+	}
+	else 
+	{
+		printf ("==>Game draw");
+		return 0;
+	}
+}
+int check()
+{
+	if (square[1] == square[2] && square[2] == square[3])
+	return 1;
+	if (square[4] == square[5] && square[5] == square[6])
+	return 1;
+	if (square[7] == square[8] && square[8] == square[9])
+	return 1;
+	if (square[1] == square[4] && square[4] == square[7])
+	return 1;
+	if (square[2] == square[5] && square[5] == square[8])
+	return 1;
+	if (square[3] == square[6] && square[6] == square[9])
+	return 1;
+	if (square[1] == square[5] && square[5] == square[9])
+	return 1;
+	if (square[3] == square[5] && square[5] == square[7])
+	return 1;
+	else if (square[1]!='1' && square[2]!= '2'&& square[3]!='3' && square[4]!='4'&&square[5]!='5' && square[6]!='6' &&square[7]!='7' &&square[8]!='8' &&square[9]!='9')
+	return 0;
+	else 
+	return -1;
+	
+	}
+	
+void drawBoard()
+{
+	system ("cls");
+	printf("\n\n\t Tic Tac Toe \n\n");
+	printf("player1(x) - player2 (0) \n\n");
+	printf("    |       |      \n");
+	printf(" %c  |  %c    |  %c  \n",square[1],square[2],square[3]);
+	printf("_|__|___    \n");
+	printf(" %c  |  %c    |  %c   \n",square[4],square[5],square[6]);
+	printf("_|__|___    \n");
+	printf(" %c  |  %c    |  %c   \n",square[7],square[8],square[9]);
+    printf("_|__|___    \n");
 }
